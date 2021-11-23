@@ -1,9 +1,10 @@
 const express =require("express");
 const dotenv =require("dotenv");
+const cors =require("cors");
+const userSchema =require('./routers/routes/userschema')
 
-const userschema =require('./routers/controllers/userschema')
 const db = require("./db/db.js");
-const   register=require('./routers/controllers/userschema')
+const courseslearing=require('./routers/routes/courses')
 
 //intinal express
 const app=express();
@@ -11,7 +12,13 @@ const app=express();
 dotenv.config()
 
 app.use(express.json());
-app.use('/user',userschema)
+app.use(cors())
+
+app.use('/User',userSchema)
+app.use('/courses',courseslearing)
+
+
+//
 
 const PORT = process.env.PORT ||4000;
 
