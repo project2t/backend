@@ -7,9 +7,6 @@ const options = {
     useUnifiedTopology: true,
   };
 
-
-  
-
 const DB = process.env.DB;
 
 mongoose.connect(`mongodb://localhost:27017/${DB}`, options).then(
@@ -19,4 +16,6 @@ mongoose.connect(`mongodb://localhost:27017/${DB}`, options).then(
   (err) => {
     console.log(err);
   }
+
+  
 );

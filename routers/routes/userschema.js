@@ -1,8 +1,10 @@
-const router =require ('express').Router();
 
-UserController =require ('../controllers/userschema')
+const express = require("express");
 
-router.get ('/',UserController.index);
+const Userrouter =express.Router();
+//here sign login up date delet
+const UserController =require ('../controllers/userschema')
 
+Userrouter.get ('/',UserController.index);
 
-module.exports =router
+module.exports = Userrouter;

@@ -1,10 +1,10 @@
 
 const express = require("express");
 const courserouter =express.Router ();
+/// add delete update
+const Usercourse =require ('./../controllers/courses')
 
-const Usercourse =require ('../controllers/courses')
-
-Usercourse.use('/users',Usercourse)
+courserouter.use('/users',Usercourse)
 
 
 module.exports = courserouter ;
