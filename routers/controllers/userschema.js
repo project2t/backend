@@ -1,15 +1,12 @@
 const User = require("./../../DB/models/userSchema");
 
 const register = (req, res) => {
-  const { name, username, email, phone, password, city } = req.body;
+  const {username, email, password } = req.body;
 
   const newuser = new User({
-    name: name,
     username: username,
     email: email,
-    phone: phone,
     password: password,
-    city: city,
   });
 
   newuser.save()
@@ -22,11 +19,11 @@ const register = (req, res) => {
 };
 ////////login
 const login = (req, res, next) => {
-  const username = req.body.username;
+  const email = req.body.email;
   const password = req.body.password;
 
   User.findOne({
-    $or: [{ email: username }, { phone: username }, { password: password }],
+    $and: [{ email: email }, { password: password }],
   })
     .then((User) => {
       res.json(User);
