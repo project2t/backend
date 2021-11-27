@@ -13,8 +13,6 @@ const getallcourses = (req, res) => {
       res.send(err);
     });
 };
-
-
 const postcoueses = (req, res) => {
   const {name,img,text, cousave} = req.body;
   const newcourse = new courseslearing  ({
@@ -32,9 +30,6 @@ const postcoueses = (req, res) => {
       res.send(err);
     });
 };
-
-
-
 const deletecourses = (req, res) => {
   const { id } = req.params;
 

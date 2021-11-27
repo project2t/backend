@@ -54,6 +54,7 @@ const userupdate = (req, res) => {
     city: req.body.city,
   };
 
+
   User.findByIdAndUpdate(username, { $set: userupdate })
     .then((User) => {
       res.json({ message: "User information has been update" });
@@ -75,4 +76,69 @@ const userdelete = (req, res) => {
     });
 };
 
-module.exports = { register, login, getallusers, userupdate, userdelete };
+const Savedcourses = (req, res) => {
+  const { email, _id } = req.params;
+  User.findOneAndUpdate(
+      { email: email },
+      { $push: { SavedSchema: _id } },
+      { new: true }
+    )
+    .then((result) => {
+      res.send(result);
+    })
+    .catch((err) => {
+      res.send(err);
+    });
+};
+
+const unsavedcourses= (req, res) => {
+  const { email, _id } = req.params;
+  User.findOneAndUpdate(
+      { email: email },
+      { $pull: { SavedSchema: _id } },
+      { new: true }
+    )
+    .then((result) => {
+      res.send(result);
+    })
+    .catch((err) => {
+      res.send(err);
+    });
+};
+
+const savedcoursescheck =(req, res) => {
+  const { email, ObjectId } = req.params;
+  User.findOne({ ObjectId: req.params.ObjectId }).then((User) => {
+User.findOneAndUpdate(
+        { email: email },
+        { $push: {  SavedSchema: ObjectId } },
+        { new: true }
+      )
+      .then((result) => {
+        res.send(result);
+      })
+      .catch((err) => {
+        res.send(err);
+      });
+  
+  });
+};
+
+const getSaved = (req, res) => {
+  const { email } = req.params;
+  User
+    .find({ email: email })
+    .populate("SavedSchema")
+    .exec()
+    .then((result) => {
+      res.send(result[0]. SavedSchema);
+    })
+
+    .catch((err) => {
+      res.send(err);
+    });
+};
+
+module.exports = { register, login, getallusers, userupdate, userdelete ,Savedcourses,unsavedcourses
+  ,getSaved ,savedcoursescheck
+};
