@@ -8,4 +8,4 @@ const courseslearing = new mongoose.Schema({
 });
 
 
-module.exports = mongoose.model("courses", courseslearing);
+module.exports = mongoose.model("Courses", courseslearing);
